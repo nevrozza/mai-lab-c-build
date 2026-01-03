@@ -4,4 +4,7 @@ project(mai_lab_bits C)
 set(CMAKE_C_STANDARD 17)
 
 add_executable(mai_lab_bits
-        main.c)
+        main.c
+        tail.h
+        head.h
+)

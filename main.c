@@ -2,7 +2,6 @@
 
 int main(void) {
     printf("Hi!");
-    int x = 0;
-    int x = 1;
+    int x = "actually, not int";
     return 0;
 }

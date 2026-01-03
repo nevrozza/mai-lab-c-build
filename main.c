@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "unexisting.h"
+#include "header.h"
 
 int main(void) {
-    printf("Hi!");
+    fun();
     return 0;
 }

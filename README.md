@@ -1,25 +1,18 @@
 ### Ошибка при ассемблировании
 
-Неверная Assemly команда
-
-> [!CAUTION]
-> На MacOS `Inline assembly` команды по умолчанию проверяются на этапе компиляции в ассемблер (т. к. компилируется через `CLang`)
-> > On targets that use the integrated assembler (such as most X86 targets), inline assembly is run through the integrated assembler instead of your system assembler
-> [Источник](https://clang.llvm.org/compatibility.html#inline-asm)
-> 
-> Решения:
-> - Компилировать файл `main.s` (ассемблер файл с ошибкой)
-> - Поменять `Clang` на `GCC`
+Неверная Assemly команда (в `.s` файле)
 
 > [!NOTE]
-> Можно проверить с помощью 
+> Для компиляции сразу двух файлов, один из которых `.s`, был изменён [CMakeLists.txt](./CMakeLists.txt).
+> Можно скомпилировать отдельно bad.s и увидеть ошибку... а можно по-другому! (чтобы не повторялось с прошлой ошибкой)
+>
 > ```
-> gcc -S main.c // на предыдущих этапах не было ошибки?
-> gcc -c main.c
+> cmake .
+> cmake --build .
 > ```
-> ИЛИ
-> ```
-> gcc -S main.s // на предыдущих этапах не было ошибки?
-> gcc -c main.s
-> ```
-
+>
+>> ```
+>> [ 33%] Building ASM object CMakeFiles/mai_lab_bits.dir/bad.s.o
+>> /Users/nevrozq/Code/mai-lab-c-compilation/bad.s:5:5: error: unrecognized instruction mnemonic
+>> ```
+> Это ошибка ассемблирования, т. к. вылетает она во время билдинга `.s.o` файла!

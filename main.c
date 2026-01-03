@@ -1,6 +1,6 @@
 #include <stdio.h>
-
+extern void bad_function(void);
 int main(void) {
-    asm("unknown command");
+    bad_function();
     return 0;
 }

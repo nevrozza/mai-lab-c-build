@@ -1,7 +1,8 @@
+
 #include <stdio.h>
-#include "header.h"
+
+int x = 1;
 
 int main(void) {
-    fun();
     return 0;
 }

@@ -1,7 +1,23 @@
+# Работа с консольным отладчиком в C
+
+> [!WARNING]
+> На `MacOS Tahoe` тяжело обстоят дела с `gdb`, из-за чего для отладки использовался `lldb`
+
 ## Ввод/Вывод с комментариями
 ```
 (lldb) breakpoint set --file main.c --line 10 // вызов функции factorial
 (lldb) br s -f main.c -l 11 // print result
+
+(lldb) br list
+Current breakpoints:
+1: file = 'main.c', line = 10, exact_match = 0, locations = 1
+  1.1: where = mai_lab_compilation`main + 32 at main.c:10:24, address = 0x00000001000008c0, unresolved, hit count = 0 
+
+2: file = 'main.c', line = 11, exact_match = 0, locations = 1
+  2.1: where = mai_lab_compilation`main + 40 at main.c:11:31, address = 0x00000001000008c8, unresolved, hit count = 0 
+
+// Здесь можно увидеть айди брейкпойнтов (по ним брейкпонты можно удалять или отключать)
+
 (lldb) run
 Process 75366 stopped
 * thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 5.1
@@ -108,8 +124,8 @@ Stop hook #17 added.
 
 (lldb) n // next
 5! = 120  // вывод printf'а
-- Hook 17 (expr -- result)
-(const int) $43 = 120
+- Hook 17 (expr -- result) // вывод display (значение ниже)
+(const int) $43 = 120 
 Process 75602 stopped
 * thread #1, queue = 'com.apple.main-thread', stop reason = step in
     frame #0: 0x00000001000008ec mai_lab_compilation`main at main.c:12:5
@@ -124,6 +140,6 @@ Process 75602 resuming
 Process 75602 exited with status = 0 (0x00000000) 
 
 Программа завершилась, удаляем display и breakpoint, если они нам больше не нужны (в этой "сессии" lldb)
-(lldb) br delete // удаляет все брейкпойнты
+(lldb) br delete // удаляет все брейкпойнты (добавить id для удаления только одного)
 (lldb) undisplay 17
 ```
